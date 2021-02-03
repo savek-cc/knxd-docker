@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  knxd:
+    container_name: knxd
+#   image: michelmu/knxd  
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:                                                                      
+        KNXD_VERSION: 0.14.39
+    ports:
+      - "6720:6720/tcp"
+      - "3671:3671/udp"
+    cap_add:
+      - SYS_RAWIO
+      - SYS_MODULE
+    restart: unless-stopped
+    devices:
+      - /dev/serial/by-id/usb-busware.de_TPUART_transparent_95738343235351D032C0-if00
+      - /dev/bus/usb:/dev/bus/usb:rwm
+      - /dev/mem:/dev/mem:rw

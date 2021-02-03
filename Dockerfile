@@ -1,0 +1,49 @@
+FROM alpine:latest
+#FROM homeassistant/amd64-base:latest
+
+ENV LANG C.UTF-8
+ARG KNXD_VERSION
+RUN set -xe \
+    && apk update \
+    && apk add --no-cache --virtual .build-dependencies \
+                git \
+     && apk add --no-cache \
+                abuild \
+                binutils \
+                build-base \
+                automake \
+                autoconf \
+                argp-standalone \
+                linux-headers \
+                libev-dev \
+                libusb-dev \
+                cmake \
+                dev86 \     
+                gcc \
+                udev \
+                bash \                
+                libusb \
+                libev \
+                libtool \                
+                jq \
+     && git clone --branch "${KNXD_VERSION}" --depth 1 https://github.com/knxd/knxd.git \
+#     && git clone https://github.com/knxd/knxd.git --single-branch --branch master \
+     && cd knxd \
+     && ./bootstrap.sh \
+     && ./configure --disable-systemd --enable-tpuart --enable-usb --enable-eibnetipserver --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
+     && mkdir -p src/include/sys && ln -s /usr/lib/bcc/include/sys/cdefs.h src/include/sys \
+     && make \
+     && make install \
+     && make clean \
+     && cd .. \
+     && rm -rf knxd \
+     && apk del --purge .build-dependencies
+
+# Copy data for add-on
+COPY run.sh /
+COPY options.json /data/
+RUN chmod a+x /run.sh
+RUN dos2unix /run.sh
+
+CMD [ "/run.sh" ]
+

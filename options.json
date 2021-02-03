@@ -1,0 +1,8 @@
+{
+    "address": "1.1.240",
+    "client_address": "1.1.241:5",
+    "interface": "tpuart",
+    "device": "/dev/serial/by-id/usb-busware.de_TPUART_transparent_95738343235351D032C0-if00",
+    "usb_filters": "",
+    "custom_config": ""
+}
