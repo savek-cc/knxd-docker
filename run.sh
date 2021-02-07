@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-#sleep 300
-
+# this file contains the configuration parameters
 CONFIG_PATH=/data/options.json
 
 INTERFACE=$(jq --raw-output ".interface" $CONFIG_PATH)
@@ -45,5 +44,4 @@ else
     echo "$KNX_INI" >> /etc/knxd.ini
 fi
 
-#exec sleep 300
 exec knxd /etc/knxd.ini

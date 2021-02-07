@@ -1,5 +1,4 @@
 FROM alpine:latest
-#FROM homeassistant/amd64-base:latest
 
 ENV LANG C.UTF-8
 ARG KNXD_VERSION
@@ -27,7 +26,6 @@ RUN set -xe \
                 libtool \                
                 jq \
      && git clone --branch "${KNXD_VERSION}" --depth 1 https://github.com/knxd/knxd.git \
-#     && git clone https://github.com/knxd/knxd.git --single-branch --branch master \
      && cd knxd \
      && ./bootstrap.sh \
      && ./configure --disable-systemd --enable-tpuart --enable-usb --enable-eibnetipserver --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \

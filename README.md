@@ -1,7 +1,7 @@
 # knxd-docker
-Build the container
+Build the container with specific version of KNXD.
 ```
-docker build -t michelmu/knxd --build-arg KNXD_VERSION=0.14.39 .
+docker build -t michelmu/knxd-docker --build-arg KNXD_VERSION=0.14.39 .
 ```
 
 Run knxd in docker container
@@ -14,5 +14,5 @@ docker run \
 --restart unless-stopped michelmu/knxd
 ``` 
 
-
-knxtool groupswrite ip:localhost 0/0/20 0
+Test the knx server by login to the container and run e.g.
+`knxtool groupswrite ip:localhost 0/0/20 0`
