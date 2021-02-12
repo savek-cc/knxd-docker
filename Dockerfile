@@ -24,8 +24,8 @@ RUN set -xe \
                 libusb \
                 libev \
                 libtool \                
-                jq \
-     && git clone --branch "${KNXD_VERSION}" --depth 1 https://github.com/knxd/knxd.git \
+                jq
+RUN git clone --branch "${KNXD_VERSION}" --depth 1 https://github.com/knxd/knxd.git \
      && cd knxd \
      && ./bootstrap.sh \
      && ./configure --disable-systemd --enable-tpuart --enable-usb --enable-eibnetipserver --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
@@ -38,10 +38,8 @@ RUN set -xe \
      && apk del --purge .build-dependencies
 
 # Copy data for add-on
-COPY run.sh /
-COPY options.json /data/
-RUN chmod a+x /run.sh
-RUN dos2unix /run.sh
+#COPY run.sh /
+COPY knxd.ini /etc/
 
-CMD [ "/run.sh" ]
-
+#RUN chmod a+x /run.sh
+ENTRYPOINT ["knxd", "/etc/knxd.ini"]
