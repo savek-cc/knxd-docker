@@ -1,13 +1,12 @@
-version: "3.8"
+version: "3.7"
 services:
   knxd:
     container_name: knxd
-#   image: michelmu/knxd  
     build:
       context: .
       dockerfile: Dockerfile
-      args:                                                                      
-        KNXD_VERSION: 0.14.39
+#      args:                                                                      
+#        KNXD_VERSION: 0.14.39
     ports:
       - "6720:6720/tcp"
       - "3671:3671/udp"

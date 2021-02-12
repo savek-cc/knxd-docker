@@ -1,8 +1,0 @@
-{
-    "address": "1.1.240",
-    "client_address": "1.1.241:5",
-    "interface": "tpuart",
-    "device": "/dev/knx",
-    "usb_filters": "",
-    "custom_config": ""
-}

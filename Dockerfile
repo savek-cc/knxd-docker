@@ -1,7 +1,6 @@
 FROM alpine:latest
 
 ENV LANG C.UTF-8
-ARG KNXD_VERSION
 RUN set -xe \
     && apk update \
     && apk add --no-cache --virtual .build-dependencies \
@@ -25,7 +24,10 @@ RUN set -xe \
                 libev \
                 libtool \                
                 jq
-RUN git clone --branch "${KNXD_VERSION}" --depth 1 https://github.com/knxd/knxd.git \
+# ARG is in my Synology Docker version not working - yet
+#ARG KNXD_VERSION
+#RUN git clone --branch "$KNXD_VERSION" --depth 1 https://github.com/knxd/knxd.git \
+RUN git clone --branch "0.14.39" --depth 1 https://github.com/knxd/knxd.git \
      && cd knxd \
      && ./bootstrap.sh \
      && ./configure --disable-systemd --enable-tpuart --enable-usb --enable-eibnetipserver --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
@@ -37,9 +39,7 @@ RUN git clone --branch "${KNXD_VERSION}" --depth 1 https://github.com/knxd/knxd.
      && rm -rf knxd \
      && apk del --purge .build-dependencies
 
-# Copy data for add-on
-#COPY run.sh /
+# copy knxd configuration
 COPY knxd.ini /etc/
 
-#RUN chmod a+x /run.sh
 ENTRYPOINT ["knxd", "/etc/knxd.ini"]
