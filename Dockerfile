@@ -28,7 +28,7 @@ RUN set -xe \
 # ARG is in my Synology Docker version not working - yet
 #ARG KNXD_VERSION
 #RUN git clone --branch "$KNXD_VERSION" --depth 1 https://github.com/knxd/knxd.git \
-RUN git clone --branch "0.14.39" --depth 1 https://github.com/knxd/knxd.git \
+RUN git clone --branch "0.14.51" --depth 1 https://github.com/knxd/knxd.git \
      && cd knxd \
      && ./bootstrap.sh \
      && ./configure --disable-systemd --enable-tpuart --enable-usb --enable-eibnetipserver --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
