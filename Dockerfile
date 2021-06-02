@@ -16,14 +16,15 @@ RUN set -xe \
                 libusb-dev \
                 cmake \
                 dev86 \     
-                gcc \
+                gcc
+RUN set -xe \
      && apk add --no-cache \
                 udev \
                 bash \                
                 libusb \
                 libev \
-				libgcc \
-				libstdc++ \
+		libgcc \
+		libstdc++ \
                 libtool              
 # ARG is in my Synology Docker version not working - yet
 #ARG KNXD_VERSION
@@ -37,8 +38,8 @@ RUN git clone --branch "0.14.51" --depth 1 https://github.com/knxd/knxd.git \
      && make install \
      && make clean \
      && cd .. \
-     && rm -rf knxd \
-     && apk del --purge .build-dependencies
+     && rm -rf knxd
+RUN apk del --purge .build-dependencies
 
 # copy knxd configuration
 COPY knxd.ini /etc/
