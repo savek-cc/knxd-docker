@@ -31,6 +31,7 @@ RUN set -xe \
 #RUN git clone --branch "$KNXD_VERSION" --depth 1 https://github.com/knxd/knxd.git \
 RUN git clone --branch "0.14.51" --depth 1 https://github.com/knxd/knxd.git \
      && cd knxd \
+     && chmod 777 ./bootstrap.sh \
      && ./bootstrap.sh \
      && ./configure --disable-systemd --enable-tpuart --enable-usb --enable-eibnetipserver --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel \
      && mkdir -p src/include/sys && ln -s /usr/lib/bcc/include/sys/cdefs.h src/include/sys \
