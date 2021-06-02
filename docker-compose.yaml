@@ -7,13 +7,14 @@ services:
       dockerfile: Dockerfile
 #      args:                                                                      
 #        KNXD_VERSION: 0.14.39
-    ports:
-      - "6720:6720/tcp"
-      - "3671:3671/udp"
+#    ports:
+#      - "6720:6720/tcp"
+#      - "3671:3671/udp"
     cap_add:
       - SYS_RAWIO
       - SYS_MODULE
     restart: unless-stopped
+    network_mode: host
     devices:
       - /dev/knx
       - /dev/bus/usb:/dev/bus/usb:rwm

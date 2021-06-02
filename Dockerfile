@@ -1,11 +1,10 @@
-FROM alpine:latest
+FROM alpine:3.12
 
 ENV LANG C.UTF-8
 RUN set -xe \
     && apk update \
     && apk add --no-cache --virtual .build-dependencies \
                 git \
-     && apk add --no-cache \
                 abuild \
                 binutils \
                 build-base \
@@ -18,12 +17,14 @@ RUN set -xe \
                 cmake \
                 dev86 \     
                 gcc \
+     && apk add --no-cache \
                 udev \
                 bash \                
                 libusb \
                 libev \
-                libtool \                
-                jq
+				libgcc \
+				libstdc++ \
+                libtool              
 # ARG is in my Synology Docker version not working - yet
 #ARG KNXD_VERSION
 #RUN git clone --branch "$KNXD_VERSION" --depth 1 https://github.com/knxd/knxd.git \
