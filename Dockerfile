@@ -15,17 +15,17 @@ RUN set -xe \
                 libev-dev \
                 libusb-dev \
                 cmake \
-                dev86 \     
+                dev86 \ 
                 gcc
 RUN set -xe \
      && apk add --no-cache \
                 udev \
-                bash \                
+                bash \ 
                 libusb \
                 libev \
-		libgcc \
-		libstdc++ \
-                libtool              
+                libgcc \
+                libstdc++ \
+                libtool
 # ARG is in my Synology Docker version not working - yet
 #ARG KNXD_VERSION
 #RUN git clone --branch "$KNXD_VERSION" --depth 1 https://github.com/knxd/knxd.git \
