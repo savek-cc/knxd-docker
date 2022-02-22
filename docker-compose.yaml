@@ -14,7 +14,7 @@ services:
       - SYS_RAWIO
       - SYS_MODULE
     restart: unless-stopped
-    network_mode: host
+#    network_mode: host
     devices:
       - /dev/knx
       - /dev/bus/usb:/dev/bus/usb:rwm
